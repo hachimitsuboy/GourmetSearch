@@ -19,7 +19,11 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
-            likeShopArray = (UserDefaults.standard.object(forKey: "likeShopModelArray")as?[ShopModel])!
+            if let storedData = UserDefaults.standard.object(forKey: "likeShopModelArray") as? Data {
+                if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [ShopModel] {
+                    likeShopArray = unarchivedObject
+                }
+            }
         }else{
             print("お気に入り登録が行われていません")
             return

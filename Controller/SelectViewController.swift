@@ -18,6 +18,7 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
     var shopModelArray = [ShopModel]()
     var likeShopModelArray = [ShopModel]()
     
+    
     @IBOutlet weak var cardSwiper: VerticalCardSwiper!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,13 +76,23 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
             likeShopModelArray.append(shopModelArray[index])
             if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
                 
-                likeShopModelArray = (UserDefaults.standard.object(forKey: "likeShopModelArray") as? [ShopModel])!
-                likeShopModelArray.append(shopModelArray[index])
-                UserDefaults.standard.set(likeShopModelArray, forKey: "likeShopModelArray")
+                if let storedData = UserDefaults.standard.object(forKey: "likeShopModelArray") as? Data {
+                    if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [ShopModel] {
+                        likeShopModelArray = unarchivedObject
+                    }
+                }
+//                likeShopModelArray = (UserDefaults.standard.object(forKey: "likeShopModelArray") as? [ShopModel])!
+//                likeShopModelArray.append(shopModelArray[index])
+//                UserDefaults.standard.set(likeShopModelArray, forKey: "likeShopModelArray")
             }else{
                 //初めてのスワイプの時
-                likeShopModelArray.append(shopModelArray[index])
-                UserDefaults.standard.set(likeShopModelArray, forKey: "likeShopModelArray")
+                let likeShopModel = shopModelArray[index]
+                likeShopModelArray.append(likeShopModel)
+                
+                let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: likeShopModelArray, requiringSecureCoding: false)
+                
+                UserDefaults.standard.set(archivedData, forKey: "likeShopModelArray")
+
             }
             
         }

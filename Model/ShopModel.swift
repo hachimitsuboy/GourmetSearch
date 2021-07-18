@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShopModel: Codable{
+class ShopModel: NSObject, NSCoding{
     
     var imageUrlString = String()
     var shopName = String()
@@ -24,6 +24,28 @@ class ShopModel: Codable{
         self.shopUrlString = shopUrlString
         
     }
+    //NSKeyedArchiverに呼び出されるシリアライズ処理（NSCodingで定義されている）
+    func encode(with aCoder: NSCoder) {
+        
+        aCoder.encode(self.imageUrlString, forKey: "imageUrlString")
+        aCoder.encode(self.shopName, forKey: "shopName")
+        aCoder.encode(self.shopGenre, forKey: "shopGenre")
+        aCoder.encode(self.shopLogoImage, forKey: "shopLogoImage")
+        aCoder.encode(self.shopUrlString, forKey: "shopUrlString")
+        
+    }
+    
+    //NSKeyedArchiverに呼び出されるでシリアライズ処理(NSCodingで処理される)
+    required init?(coder aDecoder: NSCoder){
+        imageUrlString = aDecoder.decodeObject(forKey: "imageUrlString") as! String
+        shopName = aDecoder.decodeObject(forKey: "shopName") as! String
+        shopGenre = aDecoder.decodeObject(forKey: "shopGenre") as! String
+        shopLogoImage = aDecoder.decodeObject(forKey: "shopLogoImage") as! String
+        shopUrlString = aDecoder.decodeObject(forKey: "shopUrlString") as! String
+        
+        
+    }
+    
     
     
     

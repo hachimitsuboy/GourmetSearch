@@ -87,6 +87,13 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+       let webVC = self.storyboard?.instantiateViewController(identifier: "webVC") as! WebViewController
+        
+        webVC.shopUrlString = likeShopArray[indexPath.row].shopUrlString
+        
+        self.navigationController?.pushViewController(webVC, animated: true)
+        
+        
         
     }
     

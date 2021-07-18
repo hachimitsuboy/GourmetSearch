@@ -60,7 +60,7 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         shopNameLabel.text = "店名:\(likeShopArray[indexPath.row].shopName)"
         shopGenreLabel.text = "ジャンル:\(likeShopArray[indexPath.row].shopGenre)"
         
-        
+        cell.selectionStyle = .none
         
         return cell
         

@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
-   
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,12 +19,12 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
-            likeShopArray = (UserDefaults.standard.object(forKey: "likeShopModelArray") as? Any as! [ShopModel]
+            likeShopArray = (UserDefaults.standard.object(forKey: "likeShopModelArray")as?[ShopModel])!
         }else{
             print("お気に入り登録が行われていません")
             return
         }
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -71,15 +71,15 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         tableView.reloadData()
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

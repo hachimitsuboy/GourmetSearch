@@ -48,11 +48,7 @@ class ViewController: UIViewController {
         HUD.show(.progress)
         let encodeUrlString:String = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-//        print(encodeUrlString)
-        
         AF.request(encodeUrlString, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { [self] response in
-            
-//            print("responseの結果:\(response)")
             
             
             switch response.result{

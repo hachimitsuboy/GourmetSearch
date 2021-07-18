@@ -5,6 +5,12 @@
 //  Created by Nagae on 2021/07/17.
 //
 
+/*
+ 問題点
+ 1.スワイプしたカードではなく、スワイプされたカードの一つ後ろがListに追加されてしまっている
+ 
+ */
+
 import UIKit
 import VerticalCardSwiper
 import SDWebImage
@@ -73,18 +79,30 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
         
         if swipeDirection == .Right{
             //右にスワイプされた時
-            likeShopModelArray.append(shopModelArray[index])
+           
             if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
-                
+
+                //ぶっちゃけ分からんが、エンコードやらしてカスタムクラスの配列をUserDefaultsに保存・参照する方法
                 if let storedData = UserDefaults.standard.object(forKey: "likeShopModelArray") as? Data {
+                    
                     if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [ShopModel] {
+                        
+                        //UserDefaulstsの値（配列）を取ってくる
                         likeShopModelArray = unarchivedObject
+                        //値(配列）にlikeされた要素を追加する
+                        
+                        let likeShopModel = shopModelArray[index]
+                        likeShopModelArray.append(likeShopModel)
+                        
+                        //更新された配列をUserDefaultsに保存
+                        let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: likeShopModelArray, requiringSecureCoding: false)
+                        
+                        UserDefaults.standard.set(archivedData, forKey: "likeShopModelArray")
+                        
                     }
                 }
-//                likeShopModelArray = (UserDefaults.standard.object(forKey: "likeShopModelArray") as? [ShopModel])!
-//                likeShopModelArray.append(shopModelArray[index])
-//                UserDefaults.standard.set(likeShopModelArray, forKey: "likeShopModelArray")
             }else{
+                print("1回目")
                 //初めてのスワイプの時
                 let likeShopModel = shopModelArray[index]
                 likeShopModelArray.append(likeShopModel)

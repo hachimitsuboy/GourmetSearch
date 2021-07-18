@@ -18,10 +18,14 @@ class FavListViewController: UIViewController,UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
             if let storedData = UserDefaults.standard.object(forKey: "likeShopModelArray") as? Data {
                 if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [ShopModel] {
                     likeShopArray = unarchivedObject
+                    print(likeShopArray.count)
                 }
             }
         }else{

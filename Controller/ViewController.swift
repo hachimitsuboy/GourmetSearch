@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     
     //https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=cbfac9b6e9961b61&keyword=%E5%9B%9B%E6%9D%A1%E6%B2%B3%E5%8E%9F%E7%94%BA
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var favListButton: UIButton!
+    
     
     var imageUrlString = ""
     var shopName = ""
@@ -25,7 +27,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        favListButton.layer.cornerRadius = 22.0
     }
     
     

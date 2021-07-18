@@ -31,7 +31,7 @@
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="お気に入りのお店"/>
+                                <state key="normal" title="気になるお店リスト"/>
                                 <connections>
                                     <action selector="favList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m7S-Zw-R3t"/>
                                 </connections>

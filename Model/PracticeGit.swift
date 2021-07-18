@@ -10,5 +10,5 @@ import Foundation
 class PracticeGit{
     
     var string = "初めてのGitの練習"
-    var string2 = "このファイルをCloneしたところに"
+    
 }

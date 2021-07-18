@@ -58,7 +58,6 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
             cardCell.shopNameLabel.textColor = .white
             cardCell.shopGenreLabel.text = "ジャンル:\(shopGenre)"
             cardCell.shopGenreLabel.textColor = .white
-            
             cardCell.shopImageView.sd_setImage(with: URL(string: shopModelArray[index].imageUrlString), completed: nil)
             
             return cardCell
@@ -87,7 +86,7 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
                         //値(配列）にlikeされた要素を追加する
                         
                         let likeShopModel = shopModelArray[index]
-                        likeShopModelArray.append(likeShopModel)
+                        likeShopModelArray.insert(likeShopModel, at: 0)
                         
                         //更新された配列をUserDefaultsに保存
                         let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: likeShopModelArray, requiringSecureCoding: false)
@@ -100,7 +99,7 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
                 print("1回目")
                 //初めてのスワイプの時
                 let likeShopModel = shopModelArray[index]
-                likeShopModelArray.append(likeShopModel)
+                likeShopModelArray.insert(likeShopModel, at: 0)
                 
                 let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: likeShopModelArray, requiringSecureCoding: false)
                 

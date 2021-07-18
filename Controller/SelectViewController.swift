@@ -20,7 +20,7 @@ import ChameleonFramework
 
 
 class SelectViewController: UIViewController,VerticalCardSwiperDelegate,VerticalCardSwiperDatasource {
-   
+    
     var shopModelArray = [ShopModel]()
     var likeShopModelArray = [ShopModel]()
     
@@ -28,7 +28,7 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
     @IBOutlet weak var cardSwiper: VerticalCardSwiper!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         cardSwiper.delegate = self
         cardSwiper.datasource = self
         cardSwiper.register(nib: UINib(nibName: "CardViewCell", bundle: nil), forCellWithReuseIdentifier: "CardViewCell")
@@ -51,7 +51,7 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
             
             let shopName = shopModelArray[index].shopName
             let shopGenre = shopModelArray[index].shopGenre
-          
+            
             cardCell.setRandomBackgroundColor()
             
             cardCell.shopNameLabel.text = "店名:\(shopName)"
@@ -69,19 +69,14 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
     }
     
     //willSwipeCardAwayを追記しないと、右にスワイプしたカードでも残り続ける
+    
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
-        
-        shopModelArray.remove(at: index)
-    }
-    
-    
-    func didSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
         
         if swipeDirection == .Right{
             //右にスワイプされた時
-           
+            
             if UserDefaults.standard.object(forKey: "likeShopModelArray") != nil{
-
+                
                 //ぶっちゃけ分からんが、エンコードやらしてカスタムクラスの配列をUserDefaultsに保存・参照する方法
                 if let storedData = UserDefaults.standard.object(forKey: "likeShopModelArray") as? Data {
                     
@@ -110,18 +105,27 @@ class SelectViewController: UIViewController,VerticalCardSwiperDelegate,Vertical
                 let archivedData = try! NSKeyedArchiver.archivedData(withRootObject: likeShopModelArray, requiringSecureCoding: false)
                 
                 UserDefaults.standard.set(archivedData, forKey: "likeShopModelArray")
-
+                
             }
             
         }
+        
+        
+        shopModelArray.remove(at: index)
+        
     }
+    
+    
+    
+    
+    
     
     @IBAction func back(_ sender: Any) {
         //前の画面に戻る
         dismiss(animated: true, completion: nil)
-
+        
         
     }
     
-
+    
 }
